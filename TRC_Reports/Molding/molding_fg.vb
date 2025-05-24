@@ -7,8 +7,10 @@ Public Class molding_fg
 
     Private Sub loaddata()
         Dim setdate As String = dtpicker1.Value.ToString("yyyy-MM-dd")
-        Dim settime As String = If(chk_630.Checked = True, "6:31:00", "23:59:59")
+        Dim settime As String = If(chk_630.Checked = True, "6:31:00", Date.Now.ToString("HH:mm:ss"))
         Dim selectedDT As String = setdate & " " & settime
+        Dim startOfMonth As String = dtpicker1.Value.ToString("yyyy-MM-01")
+        Dim endOfMonth As String = dtpicker1.Value.ToString("yyyy-MM-31") ' Not used, can be removed if unnecessary
 
         Dim query As String = "
     SELECT 
@@ -18,21 +20,21 @@ Public Class molding_fg
         IFNULL(mold.total_in, 0) AS Molding_IN,
         IFNULL(mold.total_out, 0) AS Molding_OUT,
         IFNULL(mold.box_count, 0) AS Molding_BoxCount,
-        IFNULL(mold.total_in, 0) - IFNULL(mold.total_out, 0) AS Molding_Total,
+        IFNULL(mold.total, 0) AS Molding_Total,
 
         IFNULL(unit56.total_in, 0) AS Unit56_IN,
         IFNULL(unit56.total_out, 0) AS Unit56_OUT,
         IFNULL(unit56.box_count, 0) AS Unit56_BoxCount,
-        IFNULL(unit56.total_in, 0) - IFNULL(unit56.total_out, 0) AS Unit56_Total,
+        IFNULL(unit56.total, 0) AS Unit56_Total,
 
         IFNULL(sunbo.total_in, 0) AS Sunbo_IN,
         IFNULL(sunbo.total_out, 0) AS Sunbo_OUT,
         IFNULL(sunbo.box_count, 0) AS Sunbo_BoxCount,
-        IFNULL(sunbo.total_in, 0) - IFNULL(sunbo.total_out, 0) AS Sunbo_Total,
+        IFNULL(sunbo.total, 0) AS Sunbo_Total,
 
-        (IFNULL(mold.total_in, 0) - IFNULL(mold.total_out, 0) +
-         IFNULL(unit56.total_in, 0) - IFNULL(unit56.total_out, 0) +
-         IFNULL(sunbo.total_in, 0) - IFNULL(sunbo.total_out, 0)) AS 'Grand Total',
+        (IFNULL(mold.total, 0) +
+         IFNULL(unit56.total, 0) +
+         IFNULL(sunbo.total, 0)) AS 'Grand Total',
 
         (IFNULL(mold.box_count, 0) +
          IFNULL(unit56.box_count, 0) +
@@ -42,30 +44,38 @@ Public Class molding_fg
 
     LEFT JOIN (
         SELECT partcode,
-            SUM(CASE WHEN CONCAT(dateIN, ' ', timeIN) < '" & selectedDT & "' THEN qty ELSE 0 END) AS total_in,
-            SUM(CASE WHEN CONCAT(dateOUT, ' ', timeOUT) < '" & selectedDT & "' THEN qty ELSE 0 END) AS total_out,
+            SUM(CASE WHEN CONCAT(dateIN) = '" & setdate & "' THEN qty ELSE 0 END) AS total_in,
+            SUM(CASE WHEN CONCAT(dateOUT) = '" & setdate & "' THEN qty ELSE 0 END) AS total_out,
+
             (SUM(CASE WHEN CONCAT(dateIN, ' ', timeIN) < '" & selectedDT & "' THEN 1 ELSE 0 END) -
-             SUM(CASE WHEN CONCAT(dateOUT, ' ', timeOUT) < '" & selectedDT & "' THEN 1 ELSE 0 END)) AS box_count
+             SUM(CASE WHEN CONCAT(dateOUT, ' ', timeOUT) < '" & selectedDT & "' THEN 1 ELSE 0 END)) AS box_count,
+
+            (SUM(CASE WHEN CONCAT(dateIN, ' ', timeIN) < '" & selectedDT & "' THEN qty ELSE 0 END) -
+             SUM(CASE WHEN CONCAT(dateOUT, ' ', timeOUT) < '" & selectedDT & "' THEN qty ELSE 0 END)) AS total
         FROM molding_stock
         GROUP BY partcode
     ) AS mold ON mm.partcode = mold.partcode
 
     LEFT JOIN (
         SELECT partcode,
-            SUM(CASE WHEN CONCAT(datein, ' ', timeIN) < '" & selectedDT & "' THEN qty ELSE 0 END) AS total_in,
-            SUM(CASE WHEN CONCAT(dateout, ' ', timeOUT) < '" & selectedDT & "' THEN qty ELSE 0 END) AS total_out,
-            (SUM(CASE WHEN CONCAT(datein, ' ', timeIN) < '" & selectedDT & "' THEN 1 ELSE 0 END) -
-             SUM(CASE WHEN CONCAT(dateout, ' ', timeOUT) < '" & selectedDT & "' THEN 1 ELSE 0 END)) AS box_count
+            SUM(CASE WHEN CONCAT(dateIN) = '" & setdate & "' THEN qty ELSE 0 END) AS total_in,
+            SUM(CASE WHEN CONCAT(dateOUT) = '" & setdate & "' THEN qty ELSE 0 END) AS total_out,
+
+            NULL AS box_count,  -- optional placeholder if not needed
+            (SUM(CASE WHEN CONCAT(dateIN, ' ', timeIN) < '" & selectedDT & "' THEN qty ELSE 0 END) -
+             SUM(CASE WHEN CONCAT(dateOUT, ' ', timeOUT) < '" & selectedDT & "' THEN qty ELSE 0 END)) AS total
         FROM logistics_unit56
         GROUP BY partcode
     ) AS unit56 ON mm.partcode = unit56.partcode
 
     LEFT JOIN (
         SELECT partcode,
-            SUM(CASE WHEN CONCAT(datein, ' ', timeIN) < '" & selectedDT & "' THEN qty ELSE 0 END) AS total_in,
-            SUM(CASE WHEN CONCAT(dateout, ' ', timeOUT) < '" & selectedDT & "' THEN qty ELSE 0 END) AS total_out,
-            (SUM(CASE WHEN CONCAT(datein, ' ', timeIN) < '" & selectedDT & "' THEN 1 ELSE 0 END) -
-             SUM(CASE WHEN CONCAT(dateout, ' ', timeOUT) < '" & selectedDT & "' THEN 1 ELSE 0 END)) AS box_count
+            SUM(CASE WHEN CONCAT(dateIN) = '" & setdate & "' THEN qty ELSE 0 END) AS total_in,
+            SUM(CASE WHEN CONCAT(dateOUT) = '" & setdate & "' THEN qty ELSE 0 END) AS total_out,
+
+            NULL AS box_count,  -- optional placeholder if not needed
+            (SUM(CASE WHEN CONCAT(dateIN, ' ', timeIN) < '" & selectedDT & "' THEN qty ELSE 0 END) -
+             SUM(CASE WHEN CONCAT(dateOUT, ' ', timeOUT) < '" & selectedDT & "' THEN qty ELSE 0 END)) AS total
         FROM logistics_sunbo
         GROUP BY partcode
     ) AS sunbo ON mm.partcode = sunbo.partcode
@@ -74,6 +84,7 @@ Public Class molding_fg
         reload(query, datagrid1)
         StyleDataGrid()
     End Sub
+
 
 
 
@@ -152,7 +163,7 @@ Public Class molding_fg
 
 
             .EnableHeadersVisualStyles = False ' Important to allow header style changes to show
-            .AutoResizeColumns()
+
         End With
     End Sub
 
@@ -172,13 +183,25 @@ Public Class molding_fg
 
     Private Sub datagrid1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles datagrid1.CellClick
         If e.RowIndex >= 0 AndAlso e.ColumnIndex >= 0 Then
+            Try
+                ' Get values safely
+                Dim selectedpartcode As String = datagrid1.Rows(e.RowIndex).Cells("partcode").Value?.ToString()
+                Dim selectedpartNAME As String = datagrid1.Rows(e.RowIndex).Cells("partname").Value?.ToString()
 
-            Dim selectedpartcode As String = datagrid1.Rows(e.RowIndex).Cells("partcode").Value.ToString()
-            Dim selectedpartNAME As String = datagrid1.Rows(e.RowIndex).Cells("partname").Value.ToString()
-            item_summary.getData(selectedpartcode, selectedpartNAME)
-            display_inSub(item_summary)
+                ' Ensure not null or empty
+                If Not String.IsNullOrEmpty(selectedpartcode) AndAlso Not String.IsNullOrEmpty(selectedpartNAME) Then
+                    Dim item As New item_summary
+                    item.getData(selectedpartcode, selectedpartNAME)
+                    display_inSub(item)
+                Else
+                    MessageBox.Show("Selected row does not contain valid part data.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                End If
+            Catch ex As Exception
+                MessageBox.Show("An error occurred while processing the selected row: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
         End If
     End Sub
+
 
 
 End Class
