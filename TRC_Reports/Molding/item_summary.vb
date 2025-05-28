@@ -101,7 +101,7 @@ ORDER BY swb.trans_date ASC
 
 
     Private Sub Guna2Button1_Click(sender As Object, e As EventArgs) Handles Guna2Button1.Click
-        Dim fg As New molding_fg
+        Dim fg As New molding_daily_summary
         display_inSub(fg)
     End Sub
 

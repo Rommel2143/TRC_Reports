@@ -49,6 +49,38 @@
     End Sub
 
     Private Sub FGToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FGToolStripMenuItem.Click
-        display_inSub(molding_fg)
+
+    End Sub
+
+    Private Sub DailySummaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DailySummaryToolStripMenuItem.Click
+        display_inSub(New molding_daily_summary)
+    End Sub
+
+    Private Sub LiveFGStockToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LiveFGStockToolStripMenuItem.Click
+        display_inSub(New molding_stocks)
+    End Sub
+
+    Private Sub SunboToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SunboToolStripMenuItem.Click
+        display_inSub(New Logistics_sunbo)
+    End Sub
+
+    Private Sub Unit56ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles Unit56ToolStripMenuItem.Click
+        display_inSub(New Logistics_unit56)
+    End Sub
+
+    Private Sub PaintingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PaintingToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub MonthlyReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MonthlyReportToolStripMenuItem.Click
+        display_inSub(New painting_monthly)
+    End Sub
+
+    Private Sub DailyReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DailyReportToolStripMenuItem.Click
+        display_inSub(New painting_daily)
+    End Sub
+
+    Private Sub LiveFGStocksToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LiveFGStocksToolStripMenuItem.Click
+        display_inSub(New painting_stock)
     End Sub
 End Class

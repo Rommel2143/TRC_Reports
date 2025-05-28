@@ -27,24 +27,33 @@ Partial Class subframe
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.btn_menu = New Guna.UI2.WinForms.Guna2Button()
         Me.btnmenu_strip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.MoldingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FGToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LiveFGStockToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DailySummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResinToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.btn_profile = New Guna.UI2.WinForms.Guna2Button()
+        Me.LogisticsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Unit56ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SunboToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PaintingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.profile_menu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
+        Me.lbl_FormName = New System.Windows.Forms.Label()
+        Me.LiveFGStocksToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MonthlyReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DailyReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btn_menu = New Guna.UI2.WinForms.Guna2Button()
+        Me.btn_profile = New Guna.UI2.WinForms.Guna2Button()
         Me.btn_user = New System.Windows.Forms.ToolStripMenuItem()
         Me.ChangePasswordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ChaneInfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.btn_administrator = New System.Windows.Forms.ToolStripMenuItem()
         Me.AddUserToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ManageUsersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LogoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
-        Me.lbl_FormName = New System.Windows.Forms.Label()
         Me.Panel2.SuspendLayout()
         Me.btnmenu_strip.SuspendLayout()
         Me.profile_menu.SuspendLayout()
@@ -82,6 +91,120 @@ Partial Class subframe
         Me.Label1.TabIndex = 7
         Me.Label1.Text = "Inventory Reports"
         '
+        'btnmenu_strip
+        '
+        Me.btnmenu_strip.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnmenu_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MoldingToolStripMenuItem, Me.LogisticsToolStripMenuItem, Me.PaintingToolStripMenuItem})
+        Me.btnmenu_strip.Name = "ContextMenuStrip1"
+        Me.btnmenu_strip.Size = New System.Drawing.Size(181, 104)
+        '
+        'MoldingToolStripMenuItem
+        '
+        Me.MoldingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FGToolStripMenuItem, Me.ResinToolStripMenuItem})
+        Me.MoldingToolStripMenuItem.Name = "MoldingToolStripMenuItem"
+        Me.MoldingToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
+        Me.MoldingToolStripMenuItem.Text = "Molding"
+        '
+        'FGToolStripMenuItem
+        '
+        Me.FGToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LiveFGStockToolStripMenuItem, Me.DailySummaryToolStripMenuItem})
+        Me.FGToolStripMenuItem.Name = "FGToolStripMenuItem"
+        Me.FGToolStripMenuItem.Size = New System.Drawing.Size(118, 26)
+        Me.FGToolStripMenuItem.Text = "FG"
+        '
+        'LiveFGStockToolStripMenuItem
+        '
+        Me.LiveFGStockToolStripMenuItem.Name = "LiveFGStockToolStripMenuItem"
+        Me.LiveFGStockToolStripMenuItem.Size = New System.Drawing.Size(187, 26)
+        Me.LiveFGStockToolStripMenuItem.Text = "Live FG Stock"
+        '
+        'DailySummaryToolStripMenuItem
+        '
+        Me.DailySummaryToolStripMenuItem.Name = "DailySummaryToolStripMenuItem"
+        Me.DailySummaryToolStripMenuItem.Size = New System.Drawing.Size(187, 26)
+        Me.DailySummaryToolStripMenuItem.Text = "Daily Summary"
+        '
+        'ResinToolStripMenuItem
+        '
+        Me.ResinToolStripMenuItem.Name = "ResinToolStripMenuItem"
+        Me.ResinToolStripMenuItem.Size = New System.Drawing.Size(118, 26)
+        Me.ResinToolStripMenuItem.Text = "Resin"
+        '
+        'LogisticsToolStripMenuItem
+        '
+        Me.LogisticsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Unit56ToolStripMenuItem, Me.SunboToolStripMenuItem})
+        Me.LogisticsToolStripMenuItem.Name = "LogisticsToolStripMenuItem"
+        Me.LogisticsToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
+        Me.LogisticsToolStripMenuItem.Text = "Logistics"
+        '
+        'Unit56ToolStripMenuItem
+        '
+        Me.Unit56ToolStripMenuItem.Name = "Unit56ToolStripMenuItem"
+        Me.Unit56ToolStripMenuItem.Size = New System.Drawing.Size(137, 26)
+        Me.Unit56ToolStripMenuItem.Text = "Unit 5-6"
+        '
+        'SunboToolStripMenuItem
+        '
+        Me.SunboToolStripMenuItem.Name = "SunboToolStripMenuItem"
+        Me.SunboToolStripMenuItem.Size = New System.Drawing.Size(137, 26)
+        Me.SunboToolStripMenuItem.Text = "Sunbo"
+        '
+        'PaintingToolStripMenuItem
+        '
+        Me.PaintingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LiveFGStocksToolStripMenuItem, Me.MonthlyReportToolStripMenuItem, Me.DailyReportToolStripMenuItem})
+        Me.PaintingToolStripMenuItem.Name = "PaintingToolStripMenuItem"
+        Me.PaintingToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
+        Me.PaintingToolStripMenuItem.Text = "Painting"
+        '
+        'profile_menu
+        '
+        Me.profile_menu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btn_user, Me.ToolStripSeparator1, Me.btn_administrator, Me.LogoutToolStripMenuItem})
+        Me.profile_menu.Name = "ContextMenuStrip1"
+        Me.profile_menu.Size = New System.Drawing.Size(182, 100)
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(178, 6)
+        '
+        'Guna2Panel1
+        '
+        Me.Guna2Panel1.Controls.Add(Me.lbl_FormName)
+        Me.Guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Guna2Panel1.Location = New System.Drawing.Point(0, 51)
+        Me.Guna2Panel1.Name = "Guna2Panel1"
+        Me.Guna2Panel1.Size = New System.Drawing.Size(1168, 56)
+        Me.Guna2Panel1.TabIndex = 8
+        '
+        'lbl_FormName
+        '
+        Me.lbl_FormName.AutoSize = True
+        Me.lbl_FormName.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_FormName.ForeColor = System.Drawing.Color.DimGray
+        Me.lbl_FormName.Location = New System.Drawing.Point(33, 3)
+        Me.lbl_FormName.Name = "lbl_FormName"
+        Me.lbl_FormName.Size = New System.Drawing.Size(31, 25)
+        Me.lbl_FormName.TabIndex = 9
+        Me.lbl_FormName.Text = "➥"
+        '
+        'LiveFGStocksToolStripMenuItem
+        '
+        Me.LiveFGStocksToolStripMenuItem.Name = "LiveFGStocksToolStripMenuItem"
+        Me.LiveFGStocksToolStripMenuItem.Size = New System.Drawing.Size(189, 26)
+        Me.LiveFGStocksToolStripMenuItem.Text = "Live FG Stocks"
+        '
+        'MonthlyReportToolStripMenuItem
+        '
+        Me.MonthlyReportToolStripMenuItem.Name = "MonthlyReportToolStripMenuItem"
+        Me.MonthlyReportToolStripMenuItem.Size = New System.Drawing.Size(189, 26)
+        Me.MonthlyReportToolStripMenuItem.Text = "Monthly Report"
+        '
+        'DailyReportToolStripMenuItem
+        '
+        Me.DailyReportToolStripMenuItem.Name = "DailyReportToolStripMenuItem"
+        Me.DailyReportToolStripMenuItem.Size = New System.Drawing.Size(189, 26)
+        Me.DailyReportToolStripMenuItem.Text = "Daily Report"
+        '
         'btn_menu
         '
         Me.btn_menu.BackColor = System.Drawing.Color.Transparent
@@ -103,32 +226,6 @@ Partial Class subframe
         Me.ToolTip1.SetToolTip(Me.btn_menu, "Menu")
         Me.btn_menu.UseTransparentBackground = True
         '
-        'btnmenu_strip
-        '
-        Me.btnmenu_strip.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnmenu_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MoldingToolStripMenuItem})
-        Me.btnmenu_strip.Name = "ContextMenuStrip1"
-        Me.btnmenu_strip.Size = New System.Drawing.Size(181, 52)
-        '
-        'MoldingToolStripMenuItem
-        '
-        Me.MoldingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FGToolStripMenuItem, Me.ResinToolStripMenuItem})
-        Me.MoldingToolStripMenuItem.Name = "MoldingToolStripMenuItem"
-        Me.MoldingToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
-        Me.MoldingToolStripMenuItem.Text = "Molding"
-        '
-        'FGToolStripMenuItem
-        '
-        Me.FGToolStripMenuItem.Name = "FGToolStripMenuItem"
-        Me.FGToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
-        Me.FGToolStripMenuItem.Text = "FG"
-        '
-        'ResinToolStripMenuItem
-        '
-        Me.ResinToolStripMenuItem.Name = "ResinToolStripMenuItem"
-        Me.ResinToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
-        Me.ResinToolStripMenuItem.Text = "Resin"
-        '
         'btn_profile
         '
         Me.btn_profile.BackColor = System.Drawing.Color.Transparent
@@ -148,12 +245,6 @@ Partial Class subframe
         Me.btn_profile.Size = New System.Drawing.Size(62, 51)
         Me.btn_profile.TabIndex = 2
         Me.ToolTip1.SetToolTip(Me.btn_profile, "Profile")
-        '
-        'profile_menu
-        '
-        Me.profile_menu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btn_user, Me.ToolStripSeparator1, Me.btn_administrator, Me.LogoutToolStripMenuItem})
-        Me.profile_menu.Name = "ContextMenuStrip1"
-        Me.profile_menu.Size = New System.Drawing.Size(182, 100)
         '
         'btn_user
         '
@@ -177,11 +268,6 @@ Partial Class subframe
         Me.ChaneInfoToolStripMenuItem.Name = "ChaneInfoToolStripMenuItem"
         Me.ChaneInfoToolStripMenuItem.Size = New System.Drawing.Size(203, 26)
         Me.ChaneInfoToolStripMenuItem.Text = "Change Info"
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(178, 6)
         '
         'btn_administrator
         '
@@ -217,26 +303,6 @@ Partial Class subframe
         Me.LogoutToolStripMenuItem.Name = "LogoutToolStripMenuItem"
         Me.LogoutToolStripMenuItem.Size = New System.Drawing.Size(181, 30)
         Me.LogoutToolStripMenuItem.Text = "Logout"
-        '
-        'Guna2Panel1
-        '
-        Me.Guna2Panel1.Controls.Add(Me.lbl_FormName)
-        Me.Guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Guna2Panel1.Location = New System.Drawing.Point(0, 51)
-        Me.Guna2Panel1.Name = "Guna2Panel1"
-        Me.Guna2Panel1.Size = New System.Drawing.Size(1168, 56)
-        Me.Guna2Panel1.TabIndex = 8
-        '
-        'lbl_FormName
-        '
-        Me.lbl_FormName.AutoSize = True
-        Me.lbl_FormName.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_FormName.ForeColor = System.Drawing.Color.DimGray
-        Me.lbl_FormName.Location = New System.Drawing.Point(33, 3)
-        Me.lbl_FormName.Name = "lbl_FormName"
-        Me.lbl_FormName.Size = New System.Drawing.Size(31, 25)
-        Me.lbl_FormName.TabIndex = 9
-        Me.lbl_FormName.Text = "➥"
         '
         'subframe
         '
@@ -281,4 +347,13 @@ Partial Class subframe
     Friend WithEvents MoldingToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FGToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ResinToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LiveFGStockToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DailySummaryToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LogisticsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Unit56ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SunboToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PaintingToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LiveFGStocksToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MonthlyReportToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DailyReportToolStripMenuItem As ToolStripMenuItem
 End Class

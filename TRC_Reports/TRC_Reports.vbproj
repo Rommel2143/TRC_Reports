@@ -15,7 +15,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>g\</PublishUrl>
+    <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -26,7 +26,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>\\ptif1-ds\SystemServer\TRC-Reports\</UpdateUrl>
-    <ApplicationRevision>8</ApplicationRevision>
+    <ApplicationRevision>10</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -194,6 +194,30 @@
     <Compile Include="admin\add_user.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Painting\painting_monthly.designer.vb">
+      <DependentUpon>painting_monthly.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Painting\painting_monthly.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Painting\painting_daily.Designer.vb">
+      <DependentUpon>painting_daily.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Painting\painting_daily.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Painting\painting_stock.Designer.vb">
+      <DependentUpon>painting_stock.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Painting\painting_stock.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logistics\Logistics_unit56.Designer.vb">
+      <DependentUpon>Logistics_unit56.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Logistics\Logistics_unit56.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Modules\CryptoModule.vb" />
     <Compile Include="Molding\item_summary.Designer.vb">
       <DependentUpon>item_summary.vb</DependentUpon>
@@ -201,10 +225,22 @@
     <Compile Include="Molding\item_summary.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Molding\molding_fg.Designer.vb">
-      <DependentUpon>molding_fg.vb</DependentUpon>
+    <Compile Include="Molding\molding_daily_summary.Designer.vb">
+      <DependentUpon>molding_daily_summary.vb</DependentUpon>
     </Compile>
-    <Compile Include="Molding\molding_fg.vb">
+    <Compile Include="Molding\molding_daily_summary.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logistics\Logistics_sunbo.Designer.vb">
+      <DependentUpon>Logistics_sunbo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Logistics\Logistics_sunbo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Molding\molding_stocks.Designer.vb">
+      <DependentUpon>molding_stocks.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Molding\molding_stocks.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Resin\Resin_Stocks.Designer.vb">
@@ -276,11 +312,29 @@
     <EmbeddedResource Include="admin\add_user.resx">
       <DependentUpon>add_user.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Painting\painting_daily.resx">
+      <DependentUpon>painting_daily.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Painting\painting_monthly.resx">
+      <DependentUpon>painting_monthly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Painting\painting_stock.resx">
+      <DependentUpon>painting_stock.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logistics\Logistics_unit56.resx">
+      <DependentUpon>Logistics_unit56.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Molding\item_summary.resx">
       <DependentUpon>item_summary.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Molding\molding_fg.resx">
-      <DependentUpon>molding_fg.vb</DependentUpon>
+    <EmbeddedResource Include="Molding\molding_daily_summary.resx">
+      <DependentUpon>molding_daily_summary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logistics\Logistics_sunbo.resx">
+      <DependentUpon>Logistics_sunbo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Molding\molding_stocks.resx">
+      <DependentUpon>molding_stocks.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resin\Resin_Stocks.resx">
       <DependentUpon>Resin_Stocks.vb</DependentUpon>
