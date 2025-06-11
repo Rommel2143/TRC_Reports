@@ -9,8 +9,6 @@ Public Class molding_daily_summary
         Dim setdate As String = dtpicker1.Value.ToString("yyyy-MM-dd")
         Dim settime As String = If(chk_630.Checked = True, "6:31:00", Date.Now.ToString("HH:mm:ss"))
         Dim selectedDT As String = setdate & " " & settime
-        Dim startOfMonth As String = dtpicker1.Value.ToString("yyyy-MM-01")
-        Dim endOfMonth As String = dtpicker1.Value.ToString("yyyy-MM-31") ' Not used, can be removed if unnecessary
 
         Dim query As String = "
     SELECT 
@@ -19,6 +17,7 @@ Public Class molding_daily_summary
 
         IFNULL(mold.total_in, 0) AS Molding_IN,
         IFNULL(mold.total_out, 0) AS Molding_OUT,
+      
         IFNULL(mold.box_count, 0) AS Molding_BoxCount,
         IFNULL(mold.total, 0) AS Molding_Total,
 
@@ -40,24 +39,29 @@ Public Class molding_daily_summary
 
         (IFNULL(mold.total, 0) +
          IFNULL(unit56.total, 0) +
+    IFNULL(mez.total, 0) +
          IFNULL(sunbo.total, 0)) AS 'Grand Total',
 
         (IFNULL(mold.box_count, 0) +
          IFNULL(unit56.box_count, 0) +
+  IFNULL(mez.box_count, 0) +
          IFNULL(sunbo.box_count, 0)) AS 'Grand Box Count'
 
     FROM molding_masterlist mm
 
     LEFT JOIN (
         SELECT partcode,
-            SUM(CASE WHEN CONCAT(dateIN) = '" & setdate & "' and tag = 'FG' THEN qty ELSE 0 END) AS total_in,
-            SUM(CASE WHEN CONCAT(dateOUT) = '" & setdate & "'  and tag = 'FG' THEN qty ELSE 0 END) AS total_out,
+            SUM(CASE WHEN CONCAT(dateIN) = '" & setdate & "'  THEN qty ELSE 0 END)+
+            SUM(CASE WHEN CONCAT(dateWIP) = '" & setdate & "'  THEN qty ELSE 0 END)AS total_in,
+            SUM(CASE WHEN CONCAT(dateOUT) = '" & setdate & "'  THEN qty ELSE 0 END) AS total_out,
 
-            (SUM(CASE WHEN CONCAT(dateIN, ' ', timeIN) < '" & selectedDT & "'  and tag = 'FG' THEN 1 ELSE 0 END) -
-             SUM(CASE WHEN CONCAT(dateOUT, ' ', timeOUT) < '" & selectedDT & "'  and tag = 'FG' THEN 1 ELSE 0 END)) AS box_count,
+            (SUM(CASE WHEN CONCAT(dateIN, ' ', timeIN) < '" & selectedDT & "'   THEN 1 ELSE 0 END) +
+             SUM(CASE WHEN CONCAT(dateWIP, ' ', timeWIP) < '" & selectedDT & "'  THEN 1 ELSE 0 END)-
+             SUM(CASE WHEN CONCAT(dateOUT, ' ', timeOUT) < '" & selectedDT & "'   THEN 1 ELSE 0 END)) AS box_count,
 
-            (SUM(CASE WHEN CONCAT(dateIN, ' ', timeIN) < '" & selectedDT & "'  and tag = 'FG' THEN qty ELSE 0 END) -
-             SUM(CASE WHEN CONCAT(dateOUT, ' ', timeOUT) < '" & selectedDT & "'  and tag = 'FG' THEN qty ELSE 0 END)) AS total
+            (SUM(CASE WHEN CONCAT(dateIN, ' ', timeIN) < '" & selectedDT & "'  THEN qty ELSE 0 END)+
+            SUM(CASE WHEN CONCAT(dateWIP, ' ', timeWIP) < '" & selectedDT & "'   THEN qty ELSE 0 END)-
+             SUM(CASE WHEN CONCAT(dateOUT, ' ', timeOUT) < '" & selectedDT & "'  THEN qty ELSE 0 END)) AS total
         FROM molding_stock
         GROUP BY partcode
     ) AS mold ON mm.partcode = mold.partcode
@@ -68,7 +72,11 @@ Public Class molding_daily_summary
             SUM(CASE WHEN CONCAT(dateIN) = '" & setdate & "' THEN qty ELSE 0 END) AS total_in,
             SUM(CASE WHEN CONCAT(dateOUT) = '" & setdate & "' THEN qty ELSE 0 END) AS total_out,
 
-            NULL AS box_count,  -- optional placeholder if not needed
+           
+            (SUM(CASE WHEN CONCAT(dateIN, ' ', timeIN) < '" & selectedDT & "'  THEN 1 ELSE 0 END) -
+             SUM(CASE WHEN CONCAT(dateOUT, ' ', timeOUT) < '" & selectedDT & "'  THEN 1 ELSE 0 END)) AS box_count,
+
+
             (SUM(CASE WHEN CONCAT(dateIN, ' ', timeIN) < '" & selectedDT & "' THEN qty ELSE 0 END) -
              SUM(CASE WHEN CONCAT(dateOUT, ' ', timeOUT) < '" & selectedDT & "' THEN qty ELSE 0 END)) AS total
         FROM logistics_mezzanine
@@ -126,10 +134,11 @@ Public Class molding_daily_summary
                 .Columns("Molding_OUT").HeaderCell.Style.ForeColor = Color.Black
             End If
             If .Columns.Contains("Molding_Total") Then
-                .Columns("Molding_Total").HeaderText = "Molding Total"
+                .Columns("Molding_Total").HeaderText = "Molding Total (WIP+FG)"
                 .Columns("Molding_Total").HeaderCell.Style.BackColor = moldingColor
                 .Columns("Molding_Total").HeaderCell.Style.ForeColor = Color.Black
             End If
+
             If .Columns.Contains("Molding_BoxCount") Then
                 .Columns("Molding_BoxCount").HeaderText = "M_Boxes"
                 .Columns("Molding_BoxCount").HeaderCell.Style.BackColor = moldingColor
@@ -220,6 +229,24 @@ Public Class molding_daily_summary
             End Try
         End If
     End Sub
+
+    Private Sub Guna2CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles m_in.CheckedChanged
+        ' Define the list of columns to keep visible when checkbox is checked
+        Dim visibleColumns As New List(Of String) From {
+            "Molding Total (WIP+FG)", "partcode", "partname", "Mez_Total", "Unit 5-6 Total", "Sunbo Total", "Grand Total"
+        }
+
+        For Each col As DataGridViewColumn In datagrid1.Columns
+            If m_in.Checked Then
+                ' Show only the specified columns
+                col.Visible = visibleColumns.Contains(col.HeaderText)
+            Else
+                ' Show all columns
+                col.Visible = True
+            End If
+        Next
+    End Sub
+
 
 
 
