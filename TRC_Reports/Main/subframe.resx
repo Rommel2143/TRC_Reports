@@ -142,7 +142,7 @@
 </value>
   </data>
   <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>908, 36</value>
+    <value>17, 42</value>
   </metadata>
   <metadata name="profile_menu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1082, 3</value>
@@ -182,6 +182,24 @@
         jbG/mAb1IzK3btJDjrFJg7Q1PklblNBGAU+xdXJVunj2ff8ArNL3YHWF8eIAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="CheckUpdatesToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAF
+        iQAABYkBbWid+gAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAK4SURBVEhLrVZL
+        axRBEI7v3I2gF19gfBzEtyII+zBIfOUUhwhqVBAv/gbjwf+ggoiCl+gvUCEHEaPOdO92z0Qkh1zMA2eq
+        N8RDTlLydWaSmc4mu0o+6GWp+rqqu7r7q+nocFCrxd2ujZnXS9nY7UfJaYxvanYvbC6vJQIVHxea2K/H
+        x5h5XRDSBaHprdBEsDujAZ9U5iK4bqymkDouLUxOHkhFo2mgKRnS00DRbQTDwH+h6YnQNAMOuDJqHHHj
+        LcNSAjtmZJjciiLe7PIy+D5vkioZFIomhaZ5oZMbLqcAGSYncwnqUtPD8XHe4vJc+D/mukRIH4SmPy2T
+        1MK4HGjzWGj6ZOs81tjlcpphZGKiM00yH2hz2PWvCYT4vc2emaLRwsFLTWeRfWSENxZmtIHSIHcODS1d
+        WaHpri2xMr2LJKHNS6Ep/te7XRrgAxWPJ8seP8psWCRiIaY1DA/zhvSeP89PboU0+HT1Gk/1XOd9eV8Q
+        0guhKbEL9sfiHdhSoMy9PGk1lPt5P1Ze8Xim2s+HXL/Q5j5ifo1+bV98vYE2l/Ok0gB3VTx+jWB5+3mP
+        D2Yrd30ZRBRfzRShAz82QWiu5ElpAhsI5YCtneCAVEkfYtaixtFVS5Svc9njvnaCA4UStTrkqsfdab15
+        pZq7KBwyILR5hau10jtId7LsPJoBQQvXFMCjSPXnToH9H7ACqOljUDfnFo141laeFU1CuAoz1goQqAXJ
+        pfftKCjgR2Ynag1hhEBCKF1OAZDaBcmld1++z211/S6wkEDTEKQ9k/lalJxyeQWIMLmZ7uQn/q908ACa
+        kW04aWezCVrtAsADybXMabRH2yaV6UXLxGUIFD1LfeB8RpttOwFgD16bS2nTR4N3mz4JRW+kph5wM0UQ
+        Oj7hxmoJ3O16fXZPUKcz+GzBJ0wzaW/2yfMXXtnS4R0WT78AAAAASUVORK5CYII=
+</value>
+  </data>
   <data name="LogoutToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -215,4 +233,7 @@
         eMqB8LuVKLSUqPq1SIdbH/8BN8k28Z8nli8AAAAASUVORK5CYII=
 </value>
   </data>
+  <metadata name="Update_timer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>8, 9</value>
+  </metadata>
 </root>

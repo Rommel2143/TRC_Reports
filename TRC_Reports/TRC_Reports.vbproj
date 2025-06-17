@@ -26,7 +26,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>\\ptif1-ds\SystemServer\TRC-Reports\</UpdateUrl>
-    <ApplicationRevision>11</ApplicationRevision>
+    <ApplicationRevision>13</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -194,6 +194,13 @@
     <Compile Include="admin\add_user.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Modules\CheckUpdateModule.vb" />
+    <Compile Include="Molding\molding_intransit.Designer.vb">
+      <DependentUpon>molding_intransit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Molding\molding_intransit.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Painting\painting_monthly.designer.vb">
       <DependentUpon>painting_monthly.vb</DependentUpon>
     </Compile>
@@ -311,6 +318,9 @@
   <ItemGroup>
     <EmbeddedResource Include="admin\add_user.resx">
       <DependentUpon>add_user.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Molding\molding_intransit.resx">
+      <DependentUpon>molding_intransit.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Painting\painting_daily.resx">
       <DependentUpon>painting_daily.vb</DependentUpon>

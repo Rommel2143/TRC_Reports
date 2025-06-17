@@ -37,14 +37,15 @@ Partial Class subframe
         Me.Unit56ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SunboToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PaintingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LiveFGStocksToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MonthlyReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DailyReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.profile_menu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
         Me.lbl_FormName = New System.Windows.Forms.Label()
-        Me.LiveFGStocksToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MonthlyReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DailyReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InTransitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.btn_menu = New Guna.UI2.WinForms.Guna2Button()
         Me.btn_profile = New Guna.UI2.WinForms.Guna2Button()
         Me.btn_user = New System.Windows.Forms.ToolStripMenuItem()
@@ -54,6 +55,8 @@ Partial Class subframe
         Me.AddUserToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ManageUsersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LogoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CheckUpdatesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Update_timer = New System.Windows.Forms.Timer(Me.components)
         Me.Panel2.SuspendLayout()
         Me.btnmenu_strip.SuspendLayout()
         Me.profile_menu.SuspendLayout()
@@ -96,20 +99,20 @@ Partial Class subframe
         Me.btnmenu_strip.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnmenu_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MoldingToolStripMenuItem, Me.LogisticsToolStripMenuItem, Me.PaintingToolStripMenuItem})
         Me.btnmenu_strip.Name = "ContextMenuStrip1"
-        Me.btnmenu_strip.Size = New System.Drawing.Size(181, 104)
+        Me.btnmenu_strip.Size = New System.Drawing.Size(141, 82)
         '
         'MoldingToolStripMenuItem
         '
         Me.MoldingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FGToolStripMenuItem, Me.ResinToolStripMenuItem})
         Me.MoldingToolStripMenuItem.Name = "MoldingToolStripMenuItem"
-        Me.MoldingToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
+        Me.MoldingToolStripMenuItem.Size = New System.Drawing.Size(140, 26)
         Me.MoldingToolStripMenuItem.Text = "Molding"
         '
         'FGToolStripMenuItem
         '
-        Me.FGToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LiveFGStockToolStripMenuItem, Me.DailySummaryToolStripMenuItem})
+        Me.FGToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LiveFGStockToolStripMenuItem, Me.DailySummaryToolStripMenuItem, Me.InTransitToolStripMenuItem})
         Me.FGToolStripMenuItem.Name = "FGToolStripMenuItem"
-        Me.FGToolStripMenuItem.Size = New System.Drawing.Size(118, 26)
+        Me.FGToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
         Me.FGToolStripMenuItem.Text = "FG"
         '
         'LiveFGStockToolStripMenuItem
@@ -127,14 +130,14 @@ Partial Class subframe
         'ResinToolStripMenuItem
         '
         Me.ResinToolStripMenuItem.Name = "ResinToolStripMenuItem"
-        Me.ResinToolStripMenuItem.Size = New System.Drawing.Size(118, 26)
+        Me.ResinToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
         Me.ResinToolStripMenuItem.Text = "Resin"
         '
         'LogisticsToolStripMenuItem
         '
         Me.LogisticsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Unit56ToolStripMenuItem, Me.SunboToolStripMenuItem})
         Me.LogisticsToolStripMenuItem.Name = "LogisticsToolStripMenuItem"
-        Me.LogisticsToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
+        Me.LogisticsToolStripMenuItem.Size = New System.Drawing.Size(140, 26)
         Me.LogisticsToolStripMenuItem.Text = "Logistics"
         '
         'Unit56ToolStripMenuItem
@@ -153,19 +156,37 @@ Partial Class subframe
         '
         Me.PaintingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LiveFGStocksToolStripMenuItem, Me.MonthlyReportToolStripMenuItem, Me.DailyReportToolStripMenuItem})
         Me.PaintingToolStripMenuItem.Name = "PaintingToolStripMenuItem"
-        Me.PaintingToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
+        Me.PaintingToolStripMenuItem.Size = New System.Drawing.Size(140, 26)
         Me.PaintingToolStripMenuItem.Text = "Painting"
+        '
+        'LiveFGStocksToolStripMenuItem
+        '
+        Me.LiveFGStocksToolStripMenuItem.Name = "LiveFGStocksToolStripMenuItem"
+        Me.LiveFGStocksToolStripMenuItem.Size = New System.Drawing.Size(189, 26)
+        Me.LiveFGStocksToolStripMenuItem.Text = "Live FG Stocks"
+        '
+        'MonthlyReportToolStripMenuItem
+        '
+        Me.MonthlyReportToolStripMenuItem.Name = "MonthlyReportToolStripMenuItem"
+        Me.MonthlyReportToolStripMenuItem.Size = New System.Drawing.Size(189, 26)
+        Me.MonthlyReportToolStripMenuItem.Text = "Monthly Report"
+        '
+        'DailyReportToolStripMenuItem
+        '
+        Me.DailyReportToolStripMenuItem.Name = "DailyReportToolStripMenuItem"
+        Me.DailyReportToolStripMenuItem.Size = New System.Drawing.Size(189, 26)
+        Me.DailyReportToolStripMenuItem.Text = "Daily Report"
         '
         'profile_menu
         '
-        Me.profile_menu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btn_user, Me.ToolStripSeparator1, Me.btn_administrator, Me.LogoutToolStripMenuItem})
+        Me.profile_menu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btn_user, Me.ToolStripSeparator1, Me.btn_administrator, Me.CheckUpdatesToolStripMenuItem, Me.LogoutToolStripMenuItem})
         Me.profile_menu.Name = "ContextMenuStrip1"
-        Me.profile_menu.Size = New System.Drawing.Size(182, 100)
+        Me.profile_menu.Size = New System.Drawing.Size(189, 130)
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(178, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(185, 6)
         '
         'Guna2Panel1
         '
@@ -187,23 +208,11 @@ Partial Class subframe
         Me.lbl_FormName.TabIndex = 9
         Me.lbl_FormName.Text = "➥"
         '
-        'LiveFGStocksToolStripMenuItem
+        'InTransitToolStripMenuItem
         '
-        Me.LiveFGStocksToolStripMenuItem.Name = "LiveFGStocksToolStripMenuItem"
-        Me.LiveFGStocksToolStripMenuItem.Size = New System.Drawing.Size(189, 26)
-        Me.LiveFGStocksToolStripMenuItem.Text = "Live FG Stocks"
-        '
-        'MonthlyReportToolStripMenuItem
-        '
-        Me.MonthlyReportToolStripMenuItem.Name = "MonthlyReportToolStripMenuItem"
-        Me.MonthlyReportToolStripMenuItem.Size = New System.Drawing.Size(189, 26)
-        Me.MonthlyReportToolStripMenuItem.Text = "Monthly Report"
-        '
-        'DailyReportToolStripMenuItem
-        '
-        Me.DailyReportToolStripMenuItem.Name = "DailyReportToolStripMenuItem"
-        Me.DailyReportToolStripMenuItem.Size = New System.Drawing.Size(189, 26)
-        Me.DailyReportToolStripMenuItem.Text = "Daily Report"
+        Me.InTransitToolStripMenuItem.Name = "InTransitToolStripMenuItem"
+        Me.InTransitToolStripMenuItem.Size = New System.Drawing.Size(187, 26)
+        Me.InTransitToolStripMenuItem.Text = "In-Transit"
         '
         'btn_menu
         '
@@ -254,7 +263,7 @@ Partial Class subframe
         Me.btn_user.Image = CType(resources.GetObject("btn_user.Image"), System.Drawing.Image)
         Me.btn_user.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.btn_user.Name = "btn_user"
-        Me.btn_user.Size = New System.Drawing.Size(181, 30)
+        Me.btn_user.Size = New System.Drawing.Size(188, 30)
         Me.btn_user.Text = "User"
         '
         'ChangePasswordToolStripMenuItem
@@ -278,20 +287,20 @@ Partial Class subframe
         Me.btn_administrator.Image = CType(resources.GetObject("btn_administrator.Image"), System.Drawing.Image)
         Me.btn_administrator.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.btn_administrator.Name = "btn_administrator"
-        Me.btn_administrator.Size = New System.Drawing.Size(181, 30)
+        Me.btn_administrator.Size = New System.Drawing.Size(188, 30)
         Me.btn_administrator.Text = "Administrator"
         Me.btn_administrator.Visible = False
         '
         'AddUserToolStripMenuItem
         '
         Me.AddUserToolStripMenuItem.Name = "AddUserToolStripMenuItem"
-        Me.AddUserToolStripMenuItem.Size = New System.Drawing.Size(179, 26)
+        Me.AddUserToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
         Me.AddUserToolStripMenuItem.Text = "Add User"
         '
         'ManageUsersToolStripMenuItem
         '
         Me.ManageUsersToolStripMenuItem.Name = "ManageUsersToolStripMenuItem"
-        Me.ManageUsersToolStripMenuItem.Size = New System.Drawing.Size(179, 26)
+        Me.ManageUsersToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
         Me.ManageUsersToolStripMenuItem.Text = "Manage Users"
         '
         'LogoutToolStripMenuItem
@@ -301,8 +310,21 @@ Partial Class subframe
         Me.LogoutToolStripMenuItem.Image = CType(resources.GetObject("LogoutToolStripMenuItem.Image"), System.Drawing.Image)
         Me.LogoutToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.LogoutToolStripMenuItem.Name = "LogoutToolStripMenuItem"
-        Me.LogoutToolStripMenuItem.Size = New System.Drawing.Size(181, 30)
+        Me.LogoutToolStripMenuItem.Size = New System.Drawing.Size(188, 30)
         Me.LogoutToolStripMenuItem.Text = "Logout"
+        '
+        'CheckUpdatesToolStripMenuItem
+        '
+        Me.CheckUpdatesToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CheckUpdatesToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.CheckUpdatesToolStripMenuItem.Image = CType(resources.GetObject("CheckUpdatesToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.CheckUpdatesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.CheckUpdatesToolStripMenuItem.Name = "CheckUpdatesToolStripMenuItem"
+        Me.CheckUpdatesToolStripMenuItem.Size = New System.Drawing.Size(188, 30)
+        Me.CheckUpdatesToolStripMenuItem.Text = "Check Updates"
+        '
+        'Update_timer
+        '
         '
         'subframe
         '
@@ -356,4 +378,7 @@ Partial Class subframe
     Friend WithEvents LiveFGStocksToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents MonthlyReportToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DailyReportToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents InTransitToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CheckUpdatesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Update_timer As Timer
 End Class

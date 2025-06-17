@@ -83,4 +83,20 @@
     Private Sub LiveFGStocksToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LiveFGStocksToolStripMenuItem.Click
         display_inSub(New painting_stock)
     End Sub
+
+    Private Sub InTransitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InTransitToolStripMenuItem.Click
+        display_inSub(New molding_intransit)
+    End Sub
+
+    Private Sub CheckUpdatesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckUpdatesToolStripMenuItem.Click
+        CheckUpdate()
+    End Sub
+    Private Sub subframe_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Update_timer.Interval = 1800000 ' 30 minutes in milliseconds (30 * 60 * 1000)
+        Update_timer.Start()
+    End Sub
+
+    Private Sub Update_timer_Tick(sender As Object, e As EventArgs) Handles Update_timer.Tick
+        CheckUpdate(0)
+    End Sub
 End Class
