@@ -21,12 +21,6 @@ Public Class molding_daily_summary
         IFNULL(mold.box_count, 0) AS Molding_BoxCount,
         IFNULL(mold.total, 0) AS Molding_Total,
 
-
-        IFNULL(mez.total_in, 0) AS Mez_IN,
-        IFNULL(mez.total_out, 0) AS Mez_OUT,
-        IFNULL(mez.box_count, 0) AS Mez_BoxCount,
-        IFNULL(mez.total, 0) AS Mez_Total,
-
         IFNULL(unit56.total_in, 0) AS Unit56_IN,
         IFNULL(unit56.total_out, 0) AS Unit56_OUT,
         IFNULL(unit56.box_count, 0) AS Unit56_BoxCount,
@@ -39,56 +33,40 @@ Public Class molding_daily_summary
 
         (IFNULL(mold.total, 0) +
          IFNULL(unit56.total, 0) +
-    IFNULL(mez.total, 0) +
          IFNULL(sunbo.total, 0)) AS 'Grand Total',
 
         (IFNULL(mold.box_count, 0) +
          IFNULL(unit56.box_count, 0) +
-  IFNULL(mez.box_count, 0) +
          IFNULL(sunbo.box_count, 0)) AS 'Grand Box Count'
 
     FROM molding_masterlist mm
 
     LEFT JOIN (
         SELECT partcode,
-            SUM(CASE WHEN CONCAT(dateIN) = '" & setdate & "'  THEN qty ELSE 0 END)+
-            SUM(CASE WHEN CONCAT(dateWIP) = '" & setdate & "'  THEN qty ELSE 0 END)AS total_in,
+            SUM(CASE WHEN CONCAT(dateIN) = '" & setdate & "'  THEN qty ELSE 0 END) AS total_in,
             SUM(CASE WHEN CONCAT(dateOUT) = '" & setdate & "'  THEN qty ELSE 0 END) AS total_out,
 
-            (SUM(CASE WHEN CONCAT(dateIN, ' ', timeIN) < '" & selectedDT & "'   THEN 1 ELSE 0 END) +
-             SUM(CASE WHEN CONCAT(dateWIP, ' ', timeWIP) < '" & selectedDT & "'  THEN 1 ELSE 0 END)-
+            (SUM(CASE WHEN CONCAT(dateIN, ' ', timeIN) < '" & selectedDT & "'   THEN 1 ELSE 0 END) -
              SUM(CASE WHEN CONCAT(dateOUT, ' ', timeOUT) < '" & selectedDT & "'   THEN 1 ELSE 0 END)) AS box_count,
 
-            (SUM(CASE WHEN CONCAT(dateIN, ' ', timeIN) < '" & selectedDT & "'  THEN qty ELSE 0 END)+
-            SUM(CASE WHEN CONCAT(dateWIP, ' ', timeWIP) < '" & selectedDT & "'   THEN qty ELSE 0 END)-
+            (SUM(CASE WHEN CONCAT(dateIN, ' ', timeIN) < '" & selectedDT & "'  THEN qty ELSE 0 END)-
              SUM(CASE WHEN CONCAT(dateOUT, ' ', timeOUT) < '" & selectedDT & "'  THEN qty ELSE 0 END)) AS total
+
         FROM molding_stock
         GROUP BY partcode
     ) AS mold ON mm.partcode = mold.partcode
 
-             
-    LEFT JOIN (
-        SELECT partcode,
-            SUM(CASE WHEN CONCAT(dateIN) = '" & setdate & "' THEN qty ELSE 0 END) AS total_in,
-            SUM(CASE WHEN CONCAT(dateOUT) = '" & setdate & "' THEN qty ELSE 0 END) AS total_out,
-
-           
-            (SUM(CASE WHEN CONCAT(dateIN, ' ', timeIN) < '" & selectedDT & "'  THEN 1 ELSE 0 END) -
-             SUM(CASE WHEN CONCAT(dateOUT, ' ', timeOUT) < '" & selectedDT & "'  THEN 1 ELSE 0 END)) AS box_count,
-
-
-            (SUM(CASE WHEN CONCAT(dateIN, ' ', timeIN) < '" & selectedDT & "' THEN qty ELSE 0 END) -
-             SUM(CASE WHEN CONCAT(dateOUT, ' ', timeOUT) < '" & selectedDT & "' THEN qty ELSE 0 END)) AS total
-        FROM logistics_mezzanine
-        GROUP BY partcode
-    ) AS mez ON mm.partcode = mez.partcode
 
     LEFT JOIN (
         SELECT partcode,
             SUM(CASE WHEN CONCAT(dateIN) = '" & setdate & "' THEN qty ELSE 0 END) AS total_in,
             SUM(CASE WHEN CONCAT(dateOUT) = '" & setdate & "' THEN qty ELSE 0 END) AS total_out,
 
-            NULL AS box_count,  -- optional placeholder if not needed
+        
+            (SUM(CASE WHEN CONCAT(dateIN, ' ', timeIN) < '" & selectedDT & "' THEN 1 ELSE 0 END) -
+             SUM(CASE WHEN CONCAT(dateOUT, ' ', timeOUT) < '" & selectedDT & "' THEN 1 ELSE 0 END)) AS box_count,
+
+
             (SUM(CASE WHEN CONCAT(dateIN, ' ', timeIN) < '" & selectedDT & "' THEN qty ELSE 0 END) -
              SUM(CASE WHEN CONCAT(dateOUT, ' ', timeOUT) < '" & selectedDT & "' THEN qty ELSE 0 END)) AS total
         FROM logistics_unit56
@@ -100,7 +78,9 @@ Public Class molding_daily_summary
             SUM(CASE WHEN CONCAT(dateIN) = '" & setdate & "' THEN qty ELSE 0 END) AS total_in,
             SUM(CASE WHEN CONCAT(dateOUT) = '" & setdate & "' THEN qty ELSE 0 END) AS total_out,
 
-            NULL AS box_count,  -- optional placeholder if not needed
+             (SUM(CASE WHEN CONCAT(dateIN, ' ', timeIN) < '" & selectedDT & "' THEN 1 ELSE 0 END) -
+             SUM(CASE WHEN CONCAT(dateOUT, ' ', timeOUT) < '" & selectedDT & "' THEN 1 ELSE 0 END)) AS box_count,
+        
             (SUM(CASE WHEN CONCAT(dateIN, ' ', timeIN) < '" & selectedDT & "' THEN qty ELSE 0 END) -
              SUM(CASE WHEN CONCAT(dateOUT, ' ', timeOUT) < '" & selectedDT & "' THEN qty ELSE 0 END)) AS total
         FROM logistics_sunbo
@@ -134,7 +114,7 @@ Public Class molding_daily_summary
                 .Columns("Molding_OUT").HeaderCell.Style.ForeColor = Color.Black
             End If
             If .Columns.Contains("Molding_Total") Then
-                .Columns("Molding_Total").HeaderText = "Molding Total (WIP+FG)"
+                .Columns("Molding_Total").HeaderText = "Molding FG"
                 .Columns("Molding_Total").HeaderCell.Style.BackColor = moldingColor
                 .Columns("Molding_Total").HeaderCell.Style.ForeColor = Color.Black
             End If
